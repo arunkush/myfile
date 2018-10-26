@@ -1,0 +1,34 @@
+package nimblesolution.tidy.Interface;
+
+import android.animation.ObjectAnimator;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
+import android.view.View;
+
+public class DrawerLayoutListener implements DrawerListener {
+    private View contentDrawer;
+    private int idView;
+
+    public DrawerLayoutListener(int idView) {
+        this.idView = idView;
+    }
+
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+        if (this.contentDrawer == null) {
+            this.contentDrawer = ((View) drawerView.getParent()).findViewById(this.idView);
+        }
+        float moveFactor = ((float) drawerView.getWidth()) * slideOffset;
+//        ObjectAnimator.ofFloat(this.contentDrawer, "translationX", new float[]{moveFactor}).setDuration(0).start();
+        
+        // for upper layout
+        ObjectAnimator.ofFloat(this.contentDrawer, "translationX", new float[]{moveFactor});
+    }
+
+    public void onDrawerStateChanged(int arg0) {
+    }
+
+    public void onDrawerClosed(View arg0) {
+    }
+
+    public void onDrawerOpened(View arg0) {
+    }
+}
